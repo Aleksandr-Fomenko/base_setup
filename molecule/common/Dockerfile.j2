@@ -1,0 +1,10 @@
+{% if item.registry is defined %}
+FROM {{ item.registry.url }}/{{ item.image }}
+{% else %}
+FROM {{ item.image }}
+{% endif %}
+
+{% if item.image.split(':')[0] in ['ubuntu'] %}
+RUN apt-get update -y \ 
+    && apt-get install python3 -y 
+{% endif %}
