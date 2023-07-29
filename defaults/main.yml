@@ -1,2 +1,4 @@
 ---
 # defaults file for base_setup
+packages:
+- vim

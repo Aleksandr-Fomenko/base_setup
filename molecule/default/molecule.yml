@@ -5,12 +5,14 @@ driver:
   name: docker
 platforms:
   - name: ubuntu
+    hostname: host1
     dockerfile: ../common/Dockerfile.j2
     image: ubuntu:22.04
     pre_build_image: false
-  - name: centos
+  - name: fedora
+    hostname: host2
     dockerfile: ../common/Dockerfile.j2
-    image: centos:centos8
+    image: fedora:38
     pre_build_image: false
 provisioner:
   name: ansible
