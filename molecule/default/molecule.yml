@@ -26,3 +26,9 @@ provisioner:
       pipelining: false
 verifier:
   name: ansible
+lint: |
+  ansible-lint
+  set -e
+  yamlint
+  flake8
+

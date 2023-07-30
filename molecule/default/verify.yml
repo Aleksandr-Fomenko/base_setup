@@ -3,8 +3,15 @@
 
 - name: Verify
   hosts: all
-  gather_facts: false
   tasks:
     - name: Example assertion
-      assert:
-        that: true
+      shell: dpkg -l | grep -q freeipa-client ; echo $?
+      register: status
+      failed_when: status == false
+      when: ansible_facts.distribution == 'Ubuntu'
+    
+    - name: Example assertion
+      shell: rpm -qa | grep -q freeipa-client ; echo $?
+      register: status
+      failed_when: status == false
+      when: ansible_facts.distribution == 'Fedora'
