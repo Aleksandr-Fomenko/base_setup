@@ -1,4 +1,26 @@
 ---
+- name: Hostname configuration
+  block:
+
+  - name: Set hostname
+    hostname:
+      name: "{{ ansible_hostname }}.{{ freeipa_domain }}"
+      use: "systemd"
+
+  - name: Chattr /etc/hosts
+    file:
+      path: /etc/hosts
+      attributes: '-i'
+
+  - name: Rewrite /etc/hosts
+    replace:
+      path: /etc/hosts
+      after: '.'
+      regexp: '^(.+)$'
+      replace: '{{ ansible_hostname }}.{{ freeipa_domain }}'
+
+  when: ansible_facts.virtualization_type != "docker"
+
 - name: Upgrade ubuntu hosts
   apt:
     only_upgrade: true

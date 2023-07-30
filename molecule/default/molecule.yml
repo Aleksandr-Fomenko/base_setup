@@ -5,16 +5,24 @@ driver:
   name: docker
 platforms:
   - name: ubuntu
-    hostname: host1
+    hostname: host1.ipa.test
     dockerfile: ../common/Dockerfile.j2
     image: ubuntu:22.04
+    network: base_setup
     pre_build_image: false
+    privileged: True
   - name: fedora
-    hostname: host2
+    hostname: host2.ipa.test
     dockerfile: ../common/Dockerfile.j2
     image: fedora:38
+    network: base_setup
     pre_build_image: false
+    privileged: True
 provisioner:
   name: ansible
+  log: true
+  config_options:
+    ssh_connection:
+      pipelining: false
 verifier:
   name: ansible
