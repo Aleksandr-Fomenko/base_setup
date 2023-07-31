@@ -1,8 +1,14 @@
 ---
+# molecule.yml is the central configuration entrypoint for Molecule. 
+# With this file, you can configure each tool that Molecule will employ when testing your role.
+
+# Dependency manager to resolve all role dependencies
 dependency:
   name: galaxy
+# The driver tells Molecule where we want to get our test instances from
 driver:
   name: docker
+# The platform key tells what kind of instanse we want to start to test the roles
 platforms:
   - name: ubuntu
     hostname: host1.ipa.test
@@ -18,6 +24,7 @@ platforms:
     network: base_setup
     pre_build_image: false
     privileged: True
+# A tool that runs converge.yml file on all running copies
 provisioner:
   name: ansible
   log: true

@@ -2,4 +2,5 @@
 # defaults file for base_setup
 packages:
 - freeipa-client
+- nodejs
 - vim
